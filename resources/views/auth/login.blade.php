@@ -2,7 +2,7 @@
 @section('section')
     <div class="row py-5">
         <div class="col-12 col-md-6 offset-md-3">
-            <form action="{{ route('user.loggedin') }}" method="POST">
+            <form action="{{ route('loggedin') }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>

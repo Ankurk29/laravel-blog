@@ -25,16 +25,27 @@
                                 {{ Auth::user()->name }}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="{{ route('user.edit') }}">Edit Profile</a></li>
-                                <li><a class="dropdown-item" href="{{ route('user.logout') }}">Logout</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('update.form') }}">
+                                        Edit Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('logout') }}">
+                                        Logout
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
                 @else
                     <div class="d-flex gap-2">
-                        <a class="btn btn-sm btn-outline-primary" href="{{ route('user.login.form') }}">Log in</a>
-                        <a class="btn btn-sm btn-outline-secondary" href="{{ route('user.register.form') }}">Sign
-                            up</a>
+                        <a class="btn btn-sm btn-outline-primary" href="{{ route('login.form') }}">
+                            Log in
+                        </a>
+                        <a class="btn btn-sm btn-outline-secondary" href="{{ route('register.form') }}">
+                            Sign up
+                        </a>
                     </div>
                 @endif
             </div>

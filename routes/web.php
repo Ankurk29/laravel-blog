@@ -21,17 +21,19 @@ Route::get('/', function () {
 });
 
 // auth
-
-Route::prefix('user')->name('user.')->group(function () {
+Route::prefix('user')->group(function () {
     Route::get('register', [RegisterController::class, 'create'])->name('register.form');
-    Route::post('register', [RegisterController::class, 'store'])->name('store');
-    Route::get('edit', [RegisterController::class, 'edit'])->name('edit');
-    Route::post('update', [RegisterController::class, 'update'])->name('update');
+    Route::post('register', [RegisterController::class, 'store'])->name('user.store');
+    Route::get('update', [RegisterController::class, 'update_form'])->name('update.form');
+    Route::patch('update', [RegisterController::class, 'update'])->name('user.update');
 
     Route::get('login', [LoginController::class, 'create'])->name('login.form');
     Route::post('login', [LoginController::class, 'store'])->name('loggedin');
     Route::get('logout', [LoginController::class, 'destroy'])->name('logout');
 });
+
+
+// Route::get('user', 'UserController@index')->name('user');
 
 // post
 // Route::get('posts', [PostsController::class, 'index'])->name('posts.index');

@@ -3,27 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct() {
+        $this->middleware('guest')->only(['create', 'store']);
+        $this->middleware('auth')->only('update_form');
+    }
+
     public function create()
     {
         return view('auth.register');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate(request(), [
@@ -43,37 +37,41 @@ class RegisterController extends Controller
         return redirect('/');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function update_form()
     {
-        //
+        $user = auth()->user();
+        return view('auth.edit')->with(compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit()
+    public function update(Request $request)
     {
-        return view('auth.edit');
-    }
+        $current_user = auth()->id();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $this->validate(request(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            // 'new_password' => 'required|min:8|max:16'
+        ]);
+
+        $user = User::find($current_user);
+
+        if ( $request->has('name') && $request->name !== null && ! empty($request->name)) {
+            $user->name = $request->name;
+        }
+
+        if ( ($request->has('new_password') && $request->new_password !== null && ! empty($request->new_password)) && Hash::check( $request->password, $user->password ) ) {
+            $user->password = bcrypt($request->new_password);
+        }
+        // TODO: check here the error
+        // else {
+        //     return back()->withErrors(
+        //         ['message' => 'Please enter the correct password.']
+        //     );
+        // }
+
+        $user->save();
+
+        return redirect()->route('update.form');
+
     }
 }
