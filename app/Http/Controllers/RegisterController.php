@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\Hash;
 class RegisterController extends Controller
 {
     public function __construct() {
-        $this->middleware('guest')->only(['create', 'store']);
-        $this->middleware('auth')->only('update_form');
+        $this->middleware('auth')->except(['create', 'store']);
     }
 
     public function create()
