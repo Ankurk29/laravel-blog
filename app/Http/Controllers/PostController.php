@@ -14,13 +14,14 @@ class PostController extends Controller
 
     public function user_posts_index()
     {
-        $posts = Post::all();
+        $posts = Post::all()->where('user_id', auth()->id());
         return view('post.index')->with(compact('posts'));
     }
 
     public function show($id)
     {
-        return view('post.show');
+        $post = Post::find($id);
+        return view('post.show')->with(compact('post'));
     }
 
     public function create()
@@ -37,7 +38,7 @@ class PostController extends Controller
 
         Post::create([
             'title' => $request->title,
-            'slug' => preg_replace('/[^A-Za-z0-9-]+/', '-', $request->title),
+            'slug' => preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($request->title)),
             'content' => $request->content,
             'user_id' => auth()->id(),
             'featured' => $request->featured == 'on' ? true : false,
