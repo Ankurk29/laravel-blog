@@ -26,7 +26,7 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li>
-                                    <a href="{{ route('posts.index') }}" class="dropdown-item">
+                                    <a href="{{ route('posts.index', Auth::user()->id) }}" class="dropdown-item">
                                         Posts
                                     </a>
                                 </li>

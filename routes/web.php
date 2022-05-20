@@ -38,7 +38,7 @@ Route::get('/', [PostController::class, 'index'])->name('home');
 Route::prefix('posts')->group(function () {
 
     // get posts
-    Route::get('/', [PostController::class, 'user_posts_index'])->name('posts.index');
+    Route::get('/user/{id}', [PostController::class, 'user_posts_index'])->name('posts.index');
 
     // create post
     Route::get('/create', [PostController::class, 'create'])->name('create.post');

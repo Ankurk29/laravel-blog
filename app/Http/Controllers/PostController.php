@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index','show']);
+        $this->middleware('auth')->except(['index','show', 'user_posts_index']);
     }
 
     public function index() {
@@ -26,15 +26,15 @@ class PostController extends Controller
         return view('index')->with(compact('posts', 'featured'));
     }
 
-    public function user_posts_index()
+    public function user_posts_index($id)
     {
-        $posts = Post::all()->where('user_id', auth()->id());
+        $posts = Post::all()->where('user_id', $id);
         return view('post.index')->with(compact('posts'));
     }
 
     public function show($id)
     {
-        $post = Post::find($id);
+        $post = Post::with('user')->find($id);
         return view('post.show')->with(compact('post'));
     }
 
@@ -58,7 +58,7 @@ class PostController extends Controller
             'featured' => $request->featured == 'on' ? true : false
         ]);
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index', auth()->id());
     }
 
     public function edit($id)
@@ -81,7 +81,7 @@ class PostController extends Controller
             'featured' => $request->featured == 'on' ? true : false
         ]);
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index', auth()->id());
     }
 
     public function destroy($id)

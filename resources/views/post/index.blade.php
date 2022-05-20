@@ -1,8 +1,10 @@
 @extends('layouts.master')
 
 @section('section')
-    @include('partials.posts_header')
-    <div class="row mb-5">
+    @if (Auth::check())
+        @include('partials.posts_header')
+    @endif
+    <div class="row {{ Auth::check() ? 'mb-5' : 'my-5' }}">
         <div class="col-12 col-md-6 offset-md-3">
             @if ($posts->count() > 0)
                 <ol class="list-group list-group-numbered list-group-flush rounded-3">
@@ -13,17 +15,20 @@
                                 class="me-auto ms-2 text-black text-capitalize text-decoration-none">
                                 <strong class="m-0">{{ $post->title }}</strong>
                             </a>
-                            <div class="d-flex">
-                                <a href="{{ route('post.edit.form', $post->id) }}" class="me-3">
-                                    <i class="bi bi-pencil-square"></i>
-                                </a>
-                                <form action="{{ route('post.delete', $post->id) }}" method="POST" class="me-3">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn p-0 d-flex btn-link"><i
-                                            class="bi bi-trash3"></i></button>
-                                </form>
-                            </div>
+                            @if (Auth::check())
+                                <div class="d-flex">
+                                    <a href="{{ route('post.edit.form', $post->id) }}" class="me-3">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <form action="{{ route('post.delete', $post->id) }}" method="POST"
+                                        class="me-3">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn p-0 d-flex btn-link"><i
+                                                class="bi bi-trash3"></i></button>
+                                    </form>
+                                </div>
+                            @endif
                         </li>
                     @endforeach
                 </ol>
