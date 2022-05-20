@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,28 +17,39 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-
 // auth
 Route::prefix('user')->group(function () {
+    // Register
     Route::get('register', [RegisterController::class, 'create'])->name('register.form');
     Route::post('register', [RegisterController::class, 'store'])->name('user.store');
-    Route::get('update', [RegisterController::class, 'update_form'])->name('update.form');
+    // Edit Profile
+    Route::get('update', [RegisterController::class, 'edit'])->name('update.form');
     Route::patch('update', [RegisterController::class, 'update'])->name('user.update');
-
+    // Login
     Route::get('login', [LoginController::class, 'create'])->name('login.form');
     Route::post('login', [LoginController::class, 'store'])->name('loggedin');
+    // Logout
     Route::get('logout', [LoginController::class, 'destroy'])->name('logout');
 });
 
+// home page
+Route::get('/', [PostController::class, 'index'])->name('home');
+// posts
+Route::prefix('posts')->group(function () {
 
-// Route::get('user', 'UserController@index')->name('user');
+    // get posts
+    Route::get('/', [PostController::class, 'user_posts_index'])->name('posts.index');
 
-// post
-// Route::get('posts', [PostsController::class, 'index'])->name('posts.index');
-// Route::post('posts', [PostsController::class, 'store'])->name('post.store');
-// Route::get('posts/{id}', [PostsController::class, 'show'])->name('post.show');
-// Route::patch('posts/{id}', [PostsController::class, 'update'])->name('post.update');
-// Route::delete('posts/{id}', [PostsController::class, 'delete'])->name('post.delete');
+    // create post
+    Route::get('/create', [PostController::class, 'create'])->name('create.post');
+    Route::post('/store', [PostController::class, 'store'])->name('post.store');
+
+    // update post
+    Route::get('/edit/{id}', [PostController::class, 'edit'])->name('post.edit.form');
+    Route::patch('/update/{id}', [PostController::class, 'update'])->name('post.update');
+
+    // delete post
+    Route::delete('/{id}', [PostController::class, 'delete'])->name('post.delete');
+});
+// single post
+Route::get('/posts/{id}', [PostController::class, 'show'])->name('post.show');

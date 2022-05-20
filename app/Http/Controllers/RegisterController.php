@@ -37,7 +37,7 @@ class RegisterController extends Controller
         return redirect('/');
     }
 
-    public function update_form()
+    public function edit()
     {
         $user = auth()->user();
         return view('auth.edit')->with(compact('user'));

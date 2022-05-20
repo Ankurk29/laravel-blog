@@ -5,7 +5,7 @@
                 <a class="link-secondary" href="#">Subscribe</a>
             </div>
             <div class="col-4 text-center">
-                <a class="blog-header-logo text-dark" href="#">Large</a>
+                <a class="blog-header-logo text-dark" href="/">Large</a>
             </div>
             <div class="col-4 d-flex justify-content-end align-items-center">
                 <a class="link-secondary" href="#" aria-label="Search">
@@ -25,6 +25,11 @@
                                 {{ Auth::user()->name }}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li>
+                                    <a href="{{ route('posts.index') }}" class="dropdown-item">
+                                        Posts
+                                    </a>
+                                </li>
                                 <li>
                                     <a class="dropdown-item" href="{{ route('update.form') }}">
                                         Edit Profile
