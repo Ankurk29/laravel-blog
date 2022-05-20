@@ -5,8 +5,11 @@
         @include('partials.breadcrumb')
         <article class="blog-post">
             <h1 class="blog-post-title text-capitalize mb-1">{{ $post->title }}</h1>
-            <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }} by <a
-                    href="">{{ auth()->user()->name }}</a></p>
+            <p class="blog-post-meta">{{ $post->created_at->toFormattedDateString() }}
+                @if (Auth::check())
+                    by <a href="">{{ auth()->user()->name }}</a>
+                @endif
+            </p>
             <p>{{ $post->content }}</p>
         </article>
     </div>

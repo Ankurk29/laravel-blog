@@ -49,7 +49,7 @@ Route::prefix('posts')->group(function () {
     Route::patch('/update/{id}', [PostController::class, 'update'])->name('post.update');
 
     // delete post
-    Route::delete('/{id}', [PostController::class, 'delete'])->name('post.delete');
+    Route::delete('/{id}', [PostController::class, 'destroy'])->name('post.delete');
 });
 // single post
 Route::get('/posts/{id}', [PostController::class, 'show'])->name('post.show');

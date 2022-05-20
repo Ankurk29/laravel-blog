@@ -10,7 +10,7 @@
                 <label for="floatingInputTitle">Title</label>
             </div>
             <div class="form-floating mb-3">
-                <textarea class="form-control" placeholder="Content" id="floatingTextarea" style="height: 100px"
+                <textarea class="form-control" placeholder="Content" id="floatingTextarea" style="height: 250px"
                     name="content"></textarea>
                 <label for="floatingTextarea">Content</label>
             </div>
