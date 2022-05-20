@@ -20,13 +20,13 @@ use App\Http\Controllers\PostController;
 // auth
 Route::prefix('user')->group(function () {
     // Register
-    Route::get('register', [RegisterController::class, 'create'])->name('register.form');
+    Route::get('register', [RegisterController::class, 'create'])->name('register');
     Route::post('register', [RegisterController::class, 'store'])->name('user.store');
     // Edit Profile
     Route::get('update', [RegisterController::class, 'edit'])->name('update.form');
     Route::patch('update', [RegisterController::class, 'update'])->name('user.update');
     // Login
-    Route::get('login', [LoginController::class, 'create'])->name('login.form');
+    Route::get('login', [LoginController::class, 'create'])->name('login');
     Route::post('login', [LoginController::class, 'store'])->name('loggedin');
     // Logout
     Route::get('logout', [LoginController::class, 'destroy'])->name('logout');

@@ -11,9 +11,19 @@ class PostController extends Controller
     {
         $this->middleware('auth')->except(['index','show']);
     }
+
     public function index() {
-        $posts = Post::all();
-        return view('index')->with(compact('posts'));
+        if ( request()->has('month') || request()->has('year')) {
+            $posts = Post::latest()
+                ->filter(request(['month', 'year']))
+                ->get();
+        } else {
+            $posts = Post::all();
+        }
+
+        $featured = Post::where('featured', 1)->first();
+
+        return view('index')->with(compact('posts', 'featured'));
     }
 
     public function user_posts_index()

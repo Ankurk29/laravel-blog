@@ -45,10 +45,10 @@
                     </div>
                 @else
                     <div class="d-flex gap-2">
-                        <a class="btn btn-sm btn-outline-primary" href="{{ route('login.form') }}">
+                        <a class="btn btn-sm btn-outline-primary" href="{{ route('login') }}">
                             Log in
                         </a>
-                        <a class="btn btn-sm btn-outline-secondary" href="{{ route('register.form') }}">
+                        <a class="btn btn-sm btn-outline-secondary" href="{{ route('register') }}">
                             Sign up
                         </a>
                     </div>
