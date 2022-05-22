@@ -38,7 +38,8 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::with('user')->find($id);
-        return view('post.show')->with(compact('post'));
+        $categories = Post::with('categories')->find($id)->categories;
+        return view('post.show')->with(compact('post', 'categories'));
     }
 
     public function create()
