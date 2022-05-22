@@ -23,8 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('partials.sidebar', function ($view) {
+        view()->composer(['partials.sidebar', 'partials.header'], function ($view) {
             $view->with('archives', \App\Models\Post::archives());
+            $view->with('all_categories', \App\Models\Category::all_categories());
         });
     }
 }

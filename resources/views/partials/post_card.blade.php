@@ -2,7 +2,24 @@
     <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative "
         style="flex-basis: calc(100%/2 - 15px)">
         <div class="col p-4 d-flex flex-column position-static">
-            <strong class="d-inline-block mb-2 text-primary">Category Name</strong>
+            @if (Route::currentRouteName() == 'category.index')
+                <strong
+                    class="d-inline-block mb-2 text-primary">{{ ucwords(str_replace('-', ' ', $category)) }}</strong>
+            @else
+                <div class="d-flex">
+                    @foreach ($post->categories as $category)
+                        @if (count($post->categories) == 1)
+                            <strong
+                                class="d-inline-block mb-2 text-primary">{{ ucwords(str_replace('-', ' ', $category->name)) }}
+                            </strong>
+                        @else
+                            <strong
+                                class="d-inline-block mb-2 text-primary">{{ ucwords(str_replace('-', ' ', $category->name)) }},&nbsp;
+                            </strong>
+                        @endif
+                    @endforeach
+                </div>
+            @endif
             <h3 class="mb-0">{{ $post->title }}</h3>
             <div class="mb-1 text-muted">{{ $post->created_at->format('M d') }}</div>
             <p class="card-text mb-auto">{{ \Str::words($post->content, 16, '...') }}</p>

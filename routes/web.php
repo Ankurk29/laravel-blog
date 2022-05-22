@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,3 +54,22 @@ Route::prefix('posts')->group(function () {
 });
 // single post
 Route::get('/posts/{id}', [PostController::class, 'show'])->name('post.show');
+
+
+// category
+
+Route::prefix('cat')->group(function () {
+
+    // get all category
+    Route::get('/', [CategoryController::class, 'index'])->name('category');
+
+    // get post with category
+    Route::get('/{name}/posts', [CategoryController::class, 'category_posts_index'])->name('category.index');
+
+    // store category
+    Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
+    Route::post('/store', [CategoryController::class, 'store'])->name('category.store');
+
+    // delete category
+    Route::delete('/{name}', [CategoryController::class, 'destroy'])->name('category.delete');
+});

@@ -14,10 +14,17 @@
                     name="content"></textarea>
                 <label for="floatingTextarea">Content</label>
             </div>
-            <div class="form-check form-switch">
+            <div class="form-check form-switch mb-3">
                 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="featured">
                 <label class="form-check-label" for="flexSwitchCheckDefault">Featured Post</label>
             </div>
+            <label for="select">Categories</label>
+            <select id="select" name="categories[]" class="form-select" size="3" multiple
+                aria-label="size 3 select example">
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ ucwords(str_replace('-', ' ', $category->name)) }}</option>
+                @endforeach
+            </select>
             <div class="my-3">
                 <button type="submit" class="btn btn-primary">Publish</button>
             </div>

@@ -5,4 +5,10 @@
     <a href="{{ route('create.post') }}"
         class="btn btn-outline-primary flex-grow-0 {{ request()->route()->getName() == 'create.post'? 'active': '' }}">Create
         Post</a>
+    <a href="{{ route('category') }}"
+        class="btn btn-outline-primary flex-grow-0 {{ request()->route()->getName() == 'category'? 'active': '' }}">All
+        Category</a>
+    <a href="{{ route('category.create') }}"
+        class="btn btn-outline-primary flex-grow-0 {{ request()->route()->getName() == 'category.create'? 'active': '' }}">Create
+        Category</a>
 </div>
