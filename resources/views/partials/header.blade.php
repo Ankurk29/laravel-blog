@@ -2,7 +2,7 @@
     <header class="blog-header lh-1 py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
             <div class="col-4 pt-1">
-                <a class="link-secondary" href="#">Subscribe</a>
+                <a data-bs-toggle="modal" data-bs-target="#subscribeModal" class="link-secondary" href="#">Subscribe</a>
             </div>
             <div class="col-4 text-center">
                 <a class="blog-header-logo text-dark" href="/">Large</a>

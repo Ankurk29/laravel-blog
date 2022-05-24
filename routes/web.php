@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SubscriberEmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,3 +79,6 @@ Route::prefix('cat')->group(function () {
 
 // search
 Route::post('search', SearchController::class)->name('search.form');
+
+// subscribe
+Route::post('subscribe', SubscriberEmailController::class)->name('subscribe.form');
