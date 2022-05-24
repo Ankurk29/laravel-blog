@@ -6,6 +6,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,3 +74,7 @@ Route::prefix('cat')->group(function () {
     // delete category
     Route::delete('/{name}', [CategoryController::class, 'destroy'])->name('category.delete');
 });
+
+
+// search
+Route::post('search', SearchController::class)->name('search.form');
